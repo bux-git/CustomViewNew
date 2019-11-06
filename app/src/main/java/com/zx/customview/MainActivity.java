@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<PagerItem> items = new ArrayList<>();
         items.add(new PagerItem("MaterialEditText", R.layout.material_edit_text));
         items.add(new PagerItem("SquareImageView", R.layout.square_image_view));
+        items.add(new PagerItem("CircleView", R.layout.circle_view_layout));
+        items.add(new PagerItem("TagLayout", R.layout.tag_layout));
 
 
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 return items.get(position).name;
             }
         });
+
+        viewPager.setCurrentItem(3);
     }
 
 
