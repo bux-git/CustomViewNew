@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(3);
+        //viewPager.setCurrentItem(3);
     }
 
 

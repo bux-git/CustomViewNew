@@ -42,7 +42,52 @@ public class TagLayout extends ViewGroup {
 
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        childRect.clear();
+        for (int i = 0; i < getChildCount(); i++) {
+
+            childRect.add(new Rect());
+        }
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+
+        //每行子View最大宽度
+        int maxWidth = 0;
+        //子view总共高度
+        int totalHeight = 0;
+
+        int widthUsed = 0;
+        int heightUsed = 0;
+        //测量子View
+        for (int i = 0; i < getChildCount(); i++) {
+
+            View child = getChildAt(i);
+            //测量子View尺寸
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, heightUsed);
+
+
+            //计算最大宽度 及 累积高度
+            MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
+            widthUsed += child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
+            heightUsed += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+
+            //记录子View位置
+            childRect.get(i).left = widthUsed + getPaddingLeft();
+            childRect.get(i).top = heightUsed + getPaddingTop();
+            childRect.get(i).right = widthUsed + getPaddingLeft() + child.getMeasuredWidth();
+            childRect.get(i).bottom = heightUsed + getPaddingTop() + child.getMeasuredHeight();
+
+        }
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     }
 
@@ -53,5 +98,10 @@ public class TagLayout extends ViewGroup {
             Rect rect = childRect.get(i);
             childView.layout(rect.left, rect.top, rect.right, rect.bottom);
         }
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return  new MarginLayoutParams(getContext(),attrs );
     }
 }
