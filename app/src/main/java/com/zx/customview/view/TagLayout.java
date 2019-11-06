@@ -59,25 +59,38 @@ public class TagLayout extends ViewGroup {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 
-        //每行子View最大宽度
-        int maxWidth = 0;
+
         //子view总共高度
         int totalHeight = 0;
 
         int widthUsed = 0;
-        int heightUsed = 0;
+        int maxHeight = 0;
+        int maxWidth = 0;
+
         //测量子View
         for (int i = 0; i < getChildCount(); i++) {
 
             View child = getChildAt(i);
             //测量子View尺寸
-            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, heightUsed);
-
-
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, totalHeight);
             //计算最大宽度 及 累积高度
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-            widthUsed += child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
-            heightUsed += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+
+            int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
+            int childHeight = child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+
+            widthUsed += childWidth;
+            maxHeight = Math.max(maxHeight, childHeight);
+
+            //计算换行条件
+            if (widthMode != MeasureSpec.UNSPECIFIED
+                    && widthSize + getPaddingLeft() + getPaddingRight() - widthUsed < childWidth) {
+                widthUsed = 0;
+                totalHeight += maxHeight;
+            } else {
+
+            }
+
 
             //记录子View位置
             childRect.get(i).left = widthUsed + getPaddingLeft();
@@ -102,6 +115,6 @@ public class TagLayout extends ViewGroup {
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return  new MarginLayoutParams(getContext(),attrs );
+        return new MarginLayoutParams(getContext(), attrs);
     }
 }
