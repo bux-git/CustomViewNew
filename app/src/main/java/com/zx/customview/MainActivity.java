@@ -2,25 +2,16 @@ package com.zx.customview;
 
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-
 import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final ArrayList<PagerItem> items = new ArrayList<>();
+        setContentView(R.layout.tag_layout);
+        /*final ArrayList<PagerItem> items = new ArrayList<>();
         items.add(new PagerItem("MaterialEditText", R.layout.material_edit_text));
         items.add(new PagerItem("SquareImageView", R.layout.square_image_view));
         items.add(new PagerItem("CircleView", R.layout.circle_view_layout));
@@ -50,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //viewPager.setCurrentItem(3);
+        viewPager.setCurrentItem(3);*/
     }
 
 

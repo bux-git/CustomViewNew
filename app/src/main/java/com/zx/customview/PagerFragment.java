@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * description：
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
  * email: 471025316@qq.com
  */
 public class PagerFragment extends Fragment {
+    private static final String TAG = "PagerFragment";
 
     public static Fragment instance(@LayoutRes int layoutId) {
         Fragment fragment = new PagerFragment();
@@ -28,7 +30,12 @@ public class PagerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getArguments().getInt("layoutId"), container, false);
+        ViewGroup view= (ViewGroup) inflater.inflate(getArguments().getInt("layoutId"), null, false);;
+        View child = view.getChildAt(0);
+        ViewPager.LayoutParams params= (ViewPager.LayoutParams) view.getLayoutParams();
+
+       // Log.d(TAG, "onCreateView: "+params.height+" view:"+view.toString());
+        return view;
     }
 
     @Override

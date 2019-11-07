@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zx.customview.view.TagLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.zx.customview.view.RandTextView
+    <com.zx.customview.view.TagLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@android:color/darker_gray"
+        android:padding="12dp">
 
-    <com.zx.customview.view.RandTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.zx.customview.view.RandTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp" />
 
-    <com.zx.customview.view.RandTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.zx.customview.view.RandTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp" />
 
-    <com.zx.customview.view.RandTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+           <!-- <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
 
-</com.zx.customview.view.TagLayout>
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.zx.customview.view.RandTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />-->
+
+    </com.zx.customview.view.TagLayout>

@@ -3,6 +3,7 @@ package com.zx.customview.view;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * email: 471025316@qq.com
  */
 public class TagLayout extends ViewGroup {
-
+    private static final String TAG = "TagLayout";
 
     private List<Rect> childRect = new ArrayList<>();
 
@@ -53,6 +54,7 @@ public class TagLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -61,46 +63,56 @@ public class TagLayout extends ViewGroup {
 
 
         //子view总共高度
-        int totalHeight = 0;
+        int totalHeight = getPaddingBottom() + getPaddingTop();
+        int totalWidth = 0;
 
-        int widthUsed = 0;
-        int maxHeight = 0;
-        int maxWidth = 0;
+        int lineHeight = 0;
+        int lineWidth = 0;
+
 
         //测量子View
         for (int i = 0; i < getChildCount(); i++) {
 
             View child = getChildAt(i);
             //测量子View尺寸
-            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, totalHeight);
+            measureChildWithMargins(child, widthMeasureSpec, getPaddingLeft() + getPaddingRight(), heightMeasureSpec, totalHeight);
             //计算最大宽度 及 累积高度
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-
             int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
             int childHeight = child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
 
-            widthUsed += childWidth;
-            maxHeight = Math.max(maxHeight, childHeight);
+            //换行条件 UNSPECIFIED >0时 使用父View提供的尺寸，==0时不限制尺寸
+            if (widthSize > 0 && childWidth > widthSize-lineWidth) {
 
-            //计算换行条件
-            if (widthMode != MeasureSpec.UNSPECIFIED
-                    && widthSize + getPaddingLeft() + getPaddingRight() - widthUsed < childWidth) {
-                widthUsed = 0;
-                totalHeight += maxHeight;
-            } else {
+                //换行时 计算 所有行总高度  及最大宽度
+                totalHeight += lineHeight;
+                totalWidth = Math.max(totalWidth, lineWidth);
+
+                //初始化新行记录数据
+                lineWidth = 0;
+                lineHeight = 0;
 
             }
 
-
             //记录子View位置
-            childRect.get(i).left = widthUsed + getPaddingLeft();
-            childRect.get(i).top = heightUsed + getPaddingTop();
-            childRect.get(i).right = widthUsed + getPaddingLeft() + child.getMeasuredWidth();
-            childRect.get(i).bottom = heightUsed + getPaddingTop() + child.getMeasuredHeight();
+            childRect.get(i).left =lineWidth  + getPaddingLeft();
+            childRect.get(i).top = totalHeight + getPaddingTop();
+            childRect.get(i).right = lineWidth + getPaddingLeft() + child.getMeasuredWidth();
+            childRect.get(i).bottom = totalHeight + getPaddingTop() + child.getMeasuredHeight();
+
+
+            //为换行时，计算当前行 累积宽度 和最大高度
+            lineHeight = Math.max(lineHeight, childHeight);
+            lineWidth += childWidth;
+
+
+
 
         }
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+       // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //计算宽高
+        Log.d(TAG, "onMeasure: "+totalWidth+"   "+totalHeight);
+        setMeasuredDimension(resolveSize(totalWidth,widthMeasureSpec), resolveSize(totalHeight,heightMeasureSpec));
 
     }
 
