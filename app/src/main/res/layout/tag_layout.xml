@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
     <com.zx.customview.view.TagLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tagLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
         android:background="@android:color/darker_gray"
         android:padding="12dp">
 
@@ -12,55 +16,53 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp" />
 
-        <com.zx.customview.view.RandTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp" />
 
-           <!-- <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+        <!-- <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />
 
-            <com.zx.customview.view.RandTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp" />-->
+         <com.zx.customview.view.RandTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp" />-->
 
     </com.zx.customview.view.TagLayout>
+
+</LinearLayout>

@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zx.customview.view.RandTextView;
+import com.zx.customview.view.TagLayout;
+
+import java.util.Random;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * description：
@@ -18,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
  */
 public class PagerFragment extends Fragment {
     private static final String TAG = "PagerFragment";
+
+    private int mLayoutId;
 
     public static Fragment instance(@LayoutRes int layoutId) {
         Fragment fragment = new PagerFragment();
@@ -30,10 +36,12 @@ public class PagerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view= (ViewGroup) inflater.inflate(getArguments().getInt("layoutId"), null, false);;
-        View child = view.getChildAt(0);
-        ViewPager.LayoutParams params= (ViewPager.LayoutParams) view.getLayoutParams();
 
+        mLayoutId=getArguments().getInt("layoutId");
+        ViewGroup view= (ViewGroup) inflater.inflate(mLayoutId, null, false);;
+      /*  View child = view.getChildAt(0);
+        ViewPager.LayoutParams params= (ViewPager.LayoutParams) view.getLayoutParams();
+*/
        // Log.d(TAG, "onCreateView: "+params.height+" view:"+view.toString());
         return view;
     }
@@ -50,5 +58,31 @@ public class PagerFragment extends Fragment {
                 editText.setLabelOpen(false);
             }
         }, 6000);*/
+
+       if(mLayoutId==R.layout.tag_layout){
+           final TagLayout tagLayout = view.findViewById(R.id.tagLayout);
+           addTagChild(tagLayout);
+
+           view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addTagChild(tagLayout);
+                }
+            });
+                   ;
+       }
+    }
+
+    private void addTagChild(TagLayout tagLayout) {
+        int childCount = new Random().nextInt(30);
+        tagLayout.removeAllViews();
+        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.rightMargin = Utils.dp2px(12);
+        params.bottomMargin= Utils.dp2px(12);
+        params.leftMargin= Utils.dp2px(12);
+        params.topMargin= Utils.dp2px(12);
+        for (int i = 0; i < childCount; i++) {
+            tagLayout.addView(new RandTextView(getActivity()),params);
+        }
     }
 }

@@ -43,17 +43,8 @@ public class TagLayout extends ViewGroup {
 
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        childRect.clear();
-        for (int i = 0; i < getChildCount(); i++) {
-
-            childRect.add(new Rect());
-        }
-    }
-
-    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
 
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
@@ -81,8 +72,9 @@ public class TagLayout extends ViewGroup {
             int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
             int childHeight = child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
 
+
             //换行条件 UNSPECIFIED >0时 使用父View提供的尺寸，==0时不限制尺寸
-            if (widthSize > 0 && childWidth > widthSize-lineWidth) {
+            if (widthSize > 0 && childWidth > widthSize - lineWidth-getPaddingLeft()-getPaddingRight()) {
 
                 //换行时 计算 所有行总高度  及最大宽度
                 totalHeight += lineHeight;
@@ -94,25 +86,36 @@ public class TagLayout extends ViewGroup {
 
             }
 
+
+            if (childRect.size() - 1 < i) {
+
+                childRect.add(new Rect());
+            }
+
             //记录子View位置
-            childRect.get(i).left =lineWidth  + getPaddingLeft();
-            childRect.get(i).top = totalHeight + getPaddingTop();
-            childRect.get(i).right = lineWidth + getPaddingLeft() + child.getMeasuredWidth();
-            childRect.get(i).bottom = totalHeight + getPaddingTop() + child.getMeasuredHeight();
+            childRect.get(i).left = lineWidth + getPaddingLeft()+params.leftMargin;
+            childRect.get(i).top = totalHeight + getPaddingTop()+params.topMargin;
+            childRect.get(i).right = childRect.get(i).left + child.getMeasuredWidth();
+            childRect.get(i).bottom = childRect.get(i).top + child.getMeasuredHeight();
 
 
             //为换行时，计算当前行 累积宽度 和最大高度
             lineHeight = Math.max(lineHeight, childHeight);
             lineWidth += childWidth;
 
-
+            //最后一个
+            if (i == getChildCount() - 1) {
+                totalHeight += lineHeight;
+                totalWidth = Math.max(totalWidth, lineWidth);
+            }
 
 
         }
-       // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //计算宽高
-        Log.d(TAG, "onMeasure: "+totalWidth+"   "+totalHeight);
-        setMeasuredDimension(resolveSize(totalWidth,widthMeasureSpec), resolveSize(totalHeight,heightMeasureSpec));
+        Log.d(TAG, "onMeasure: " + totalWidth + "   " + totalHeight);
+        setMeasuredDimension(resolveSize(totalWidth+getPaddingLeft()+getPaddingRight(), widthMeasureSpec)
+                , resolveSize(totalHeight+getPaddingTop()+getPaddingBottom(), heightMeasureSpec));
 
     }
 
