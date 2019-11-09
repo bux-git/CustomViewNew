@@ -54,7 +54,7 @@ public class TagLayout extends ViewGroup {
 
 
         //子view总共高度
-        int totalHeight = getPaddingBottom() + getPaddingTop();
+        int totalHeight =0;
         int totalWidth = 0;
 
         int lineHeight = 0;
@@ -66,7 +66,7 @@ public class TagLayout extends ViewGroup {
 
             View child = getChildAt(i);
             //测量子View尺寸
-            measureChildWithMargins(child, widthMeasureSpec, getPaddingLeft() + getPaddingRight(), heightMeasureSpec, totalHeight);
+            measureChildWithMargins(child, widthMeasureSpec, getPaddingLeft() + getPaddingRight(), heightMeasureSpec, totalHeight+getPaddingLeft() + getPaddingRight());
             //计算最大宽度 及 累积高度
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
@@ -74,7 +74,7 @@ public class TagLayout extends ViewGroup {
 
 
             //换行条件 UNSPECIFIED >0时 使用父View提供的尺寸，==0时不限制尺寸
-            if (widthSize > 0 && childWidth > widthSize - lineWidth-getPaddingLeft()-getPaddingRight()) {
+            if (widthSize > 0 && childWidth > widthSize - lineWidth-getPaddingRight()-getPaddingLeft()) {
 
                 //换行时 计算 所有行总高度  及最大宽度
                 totalHeight += lineHeight;
@@ -93,8 +93,8 @@ public class TagLayout extends ViewGroup {
             }
 
             //记录子View位置
-            childRect.get(i).left = lineWidth + getPaddingLeft()+params.leftMargin;
-            childRect.get(i).top = totalHeight + getPaddingTop()+params.topMargin;
+            childRect.get(i).left = lineWidth +params.leftMargin+getPaddingLeft();
+            childRect.get(i).top = totalHeight +params.topMargin+getPaddingRight();
             childRect.get(i).right = childRect.get(i).left + child.getMeasuredWidth();
             childRect.get(i).bottom = childRect.get(i).top + child.getMeasuredHeight();
 
@@ -114,8 +114,8 @@ public class TagLayout extends ViewGroup {
         // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //计算宽高
         Log.d(TAG, "onMeasure: " + totalWidth + "   " + totalHeight);
-        setMeasuredDimension(resolveSize(totalWidth+getPaddingLeft()+getPaddingRight(), widthMeasureSpec)
-                , resolveSize(totalHeight+getPaddingTop()+getPaddingBottom(), heightMeasureSpec));
+        setMeasuredDimension(resolveSize(totalWidth+getPaddingRight()+getPaddingLeft(), widthMeasureSpec)
+                , resolveSize(totalHeight+getPaddingBottom()+getPaddingTop(), heightMeasureSpec));
 
     }
 
