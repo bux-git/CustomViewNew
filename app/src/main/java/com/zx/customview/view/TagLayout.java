@@ -66,7 +66,7 @@ public class TagLayout extends ViewGroup {
 
             View child = getChildAt(i);
             //测量子View尺寸
-            measureChildWithMargins(child, widthMeasureSpec, getPaddingLeft() + getPaddingRight(), heightMeasureSpec, totalHeight+getPaddingLeft() + getPaddingRight());
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, totalHeight);
             //计算最大宽度 及 累积高度
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;

@@ -63,7 +63,7 @@ public class PagerFragment extends Fragment {
            final TagLayout tagLayout = view.findViewById(R.id.tagLayout);
            addTagChild(tagLayout);
 
-           view.setOnClickListener(new View.OnClickListener() {
+           tagLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     addTagChild(tagLayout);
@@ -74,7 +74,7 @@ public class PagerFragment extends Fragment {
     }
 
     private void addTagChild(TagLayout tagLayout) {
-        int childCount = new Random().nextInt(30);
+        int childCount = new Random().nextInt(50);
         tagLayout.removeAllViews();
         ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.rightMargin = Utils.dp2px(12);
