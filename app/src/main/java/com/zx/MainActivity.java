@@ -1,8 +1,9 @@
-package com.zx.customview;
+package com.zx;
 
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.zx.customview.R;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
         items.add(new PagerItem("SquareImageView", R.layout.square_image_view));
         items.add(new PagerItem("CircleView", R.layout.circle_view_layout));
         items.add(new PagerItem("TagLayout", R.layout.tag_layout));
-
-
+        items.add(new PagerItem("TouchView", R.layout.touch_view));
+        items.add(new PagerItem("ScaleImageView", R.layout.scale_image_view));
+        items.add(new PagerItem("ScaleImageView", R.layout.scale_image_view));
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(3);
+        viewPager.setCurrentItem(5);
     }
 
 

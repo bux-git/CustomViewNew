@@ -1,12 +1,13 @@
-package com.zx.customview;
+package com.zx;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zx.customview.view.RandTextView;
-import com.zx.customview.view.TagLayout;
+import com.zx.customview.R;
+import com.zx.customview.RandTextView;
+import com.zx.customview.TagLayout;
 
 import java.util.Random;
 
@@ -59,7 +60,7 @@ public class PagerFragment extends Fragment {
             }
         }, 6000);*/
 
-       if(mLayoutId==R.layout.tag_layout){
+       if(mLayoutId== R.layout.tag_layout){
            final TagLayout tagLayout = view.findViewById(R.id.tagLayout);
            addTagChild(tagLayout);
 

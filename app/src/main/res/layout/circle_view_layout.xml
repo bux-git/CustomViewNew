@@ -6,7 +6,7 @@
     android:background="@color/colorAccent"
     android:orientation="vertical">
 
-    <com.zx.customview.view.CircleView
+    <com.zx.customview.CircleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -1,11 +1,11 @@
-package com.zx.customview.view;
+package com.zx.customview;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 
-import com.zx.customview.Utils;
+import com.zx.Utils;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.zx.customview.view;
+package com.zx.customview;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -1,4 +1,4 @@
-package com.zx.customview.view;
+package com.zx.customview;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -12,8 +12,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.zx.customview.R;
-import com.zx.customview.Utils;
+import com.zx.Utils;
 
 import androidx.appcompat.widget.AppCompatEditText;
 

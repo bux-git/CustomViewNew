@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.zx.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="#3000ff00">
 
-        <com.zx.customview.view.MaterialEditText
+        <com.zx.customview.MaterialEditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

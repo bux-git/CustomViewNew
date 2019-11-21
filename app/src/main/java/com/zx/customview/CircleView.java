@@ -1,4 +1,4 @@
-package com.zx.customview.view;
+package com.zx.customview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.zx.customview.Utils;
+import com.zx.Utils;
 
 import androidx.annotation.Nullable;
 
