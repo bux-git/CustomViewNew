@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewParent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * description：
@@ -44,7 +48,7 @@ public class Utils {
         int srcHeight = options.outHeight;
         int srcWidth = options.outWidth;
 
-        options.inSampleSize =1;
+        options.inSampleSize = 1;
         //图片宽或高 大于目标宽高 需要缩放
         if (srcHeight > reqHeight || srcWidth > reqWidth) {
             float dstHRadio = (float) srcHeight / reqHeight;
@@ -62,5 +66,22 @@ public class Utils {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options);
         Log.d("calculateInSampleSize", "w:h " + bitmap.getWidth() + ":" + bitmap.getHeight() + "  inSampleSize:" + options.inSampleSize);
         return bitmap;
+    }
+
+    public static ViewParent getDisallowInterceptParent(View view) {
+
+        ViewParent parent = null;
+        for (int i = 0; i < 4; i++) {
+            if (parent != null) {
+                parent = parent.getParent();
+            } else {
+                parent = view.getParent();
+            }
+
+            if (parent instanceof ViewPager) {
+                return parent;
+            }
+        }
+        return null;
     }
 }
