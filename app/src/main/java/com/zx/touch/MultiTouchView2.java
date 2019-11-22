@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
  * @author：bux on 2019/11/22 14:46
  * @email: 471025316@qq.com
  */
-public class MultiTouchView extends View {
+public class MultiTouchView2 extends View {
     private static final String TAG = "MultiTouchView";
     private static final float IMAGE_WIDTH = Utils.dp2px(300);
     private static final float slop = Utils.dp2px(5);
@@ -36,19 +36,19 @@ public class MultiTouchView extends View {
     private float lastY;
     private int trackingId;
 
-    public MultiTouchView(Context context) {
+    public MultiTouchView2(Context context) {
         super(context);
     }
 
-    public MultiTouchView(Context context, @Nullable AttributeSet attrs) {
+    public MultiTouchView2(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MultiTouchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MultiTouchView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MultiTouchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MultiTouchView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -82,57 +82,51 @@ public class MultiTouchView extends View {
         ACTION_UP 最后一个手指抬起
 
 
-        需求:当新手指按下时 使用新手指滑动
-        有手指，抬起时默认选择最后一个手指
+        需求:多个手指合作，取多点中间位置为焦点
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        setDisallowInterceptParent(pointInView(event.getX(), event.getY()));
+
+        int pointerCount = event.getPointerCount();
+
+        float sumX = 0;
+        float sumY = 0;
+
+        boolean isPointUp = event.getActionMasked() == MotionEvent.ACTION_POINTER_UP;
+        for (int i = 0; i < pointerCount; i++) {
+            if (isPointUp && event.getActionIndex() == i) {
+                continue;
+            }
+            sumX += event.getX(i);
+            sumY += event.getY(i);
+        }
+        //当前协作焦点坐标
+        if (isPointUp) {
+            pointerCount--;
+        }
+
+        float forceX = sumX / pointerCount;
+        float forceY = sumY / pointerCount;
+
+        setDisallowInterceptParent(pointInView(forceX, forceY));
 
         switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_POINTER_DOWN:
             case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "onTouchEvent: ACTION_DOWN");
-                lastX = event.getX(0);
-                lastY = event.getY(0);
+                lastX = forceX;
+                lastY = forceY;
                 break;
             case MotionEvent.ACTION_MOVE:
-                int mIndex = Math.max(event.findPointerIndex(trackingId), 0);
-                Log.d(TAG, "onTouchEvent:ACTION_MOVE " + mIndex);
-                offsetX += event.getX(mIndex) - lastX;
-                offsetY += event.getY(mIndex) - lastY;
+                Log.d(TAG, "onTouchEvent:ACTION_MOVE " + forceX + "-" + forceY + " count:" + pointerCount);
+                offsetX += forceX - lastX;
+                offsetY += forceY - lastY;
 
-                lastX = event.getX(mIndex);
-                lastY = event.getY(mIndex);
+                lastX = forceX;
+                lastY = forceY;
                 invalidate();
                 break;
-            case MotionEvent.ACTION_POINTER_DOWN:
-                Log.d(TAG, "onTouchEvent: ACTION_POINTER_DOWN");
-                //此方法只在pointer中有效
-                //记录新手指Id
-                int index = event.getActionIndex();
-                trackingId = event.getPointerId(index);
-                //记录位置
-                lastX = event.getX(index);
-                lastY = event.getY(index);
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                Log.d(TAG, "onTouchEvent: ACTION_POINTER_UP");
-                int upIndex = event.getActionIndex();
-                int upId = event.getPointerId(upIndex);
-                //目标手指抬起时 换一个目标手指 并记录 新手指坐标
-                if(upId==trackingId){
-                    upIndex = upId == event.getPointerCount() - 1 ? event.getPointerCount() - 2 : event.getPointerCount() - 1;
-                    trackingId = event.getPointerId(upIndex);
-                    //记录位置
-                    lastX = event.getX(upIndex);
-                    lastY = event.getY(upIndex);
-                }
 
-
-                break;
-            case MotionEvent.ACTION_UP:
-                Log.d(TAG, "onTouchEvent: ACTION_UP");
-                break;
             default:
         }
         return true;

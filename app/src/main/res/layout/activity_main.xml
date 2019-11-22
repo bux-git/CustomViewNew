@@ -15,7 +15,12 @@
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextAppearance="@android:style/TextAppearance" />
 
-    <androidx.viewpager.widget.ViewPager
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <com.zx.FixedViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

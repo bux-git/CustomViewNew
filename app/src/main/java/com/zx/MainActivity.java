@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         items.add(new PagerItem("TagLayout", R.layout.tag_layout));
         items.add(new PagerItem("TouchView", R.layout.touch_view));
         items.add(new PagerItem("ScaleImageView", R.layout.scale_image_view));
-        items.add(new PagerItem("MultiTouchView", R.layout.multi_touch_view));
+        items.add(new PagerItem("多触—接力", R.layout.multi_touch_view));
+        items.add(new PagerItem("多触—配合", R.layout.multi_touch_view2));
+        items.add(new PagerItem("多触—独立", R.layout.multi_touch_view3));
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(6);
+        viewPager.setCurrentItem(8);
     }
 
 
