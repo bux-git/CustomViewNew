@@ -126,6 +126,7 @@ public class TagLayout extends ViewGroup {
             Rect rect = childRect.get(i);
             childView.layout(rect.left, rect.top, rect.right, rect.bottom);
         }
+
     }
 
     @Override

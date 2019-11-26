@@ -15,6 +15,9 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * description：
@@ -38,12 +41,13 @@ public class PagerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mLayoutId=getArguments().getInt("layoutId");
-        ViewGroup view= (ViewGroup) inflater.inflate(mLayoutId, null, false);;
+        mLayoutId = getArguments().getInt("layoutId");
+        ViewGroup view = (ViewGroup) inflater.inflate(mLayoutId, null, false);
+        ;
       /*  View child = view.getChildAt(0);
         ViewPager.LayoutParams params= (ViewPager.LayoutParams) view.getLayoutParams();
 */
-       // Log.d(TAG, "onCreateView: "+params.height+" view:"+view.toString());
+        // Log.d(TAG, "onCreateView: "+params.height+" view:"+view.toString());
         return view;
     }
 
@@ -60,18 +64,62 @@ public class PagerFragment extends Fragment {
             }
         }, 6000);*/
 
-       if(mLayoutId== R.layout.tag_layout){
-           final TagLayout tagLayout = view.findViewById(R.id.tagLayout);
-           addTagChild(tagLayout);
+        switch (mLayoutId) {
+            case R.layout.tag_layout:
+                final TagLayout tagLayout = view.findViewById(R.id.tagLayout);
+                addTagChild(tagLayout);
 
-           tagLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addTagChild(tagLayout);
-                }
-            });
-                   ;
-       }
+                tagLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addTagChild(tagLayout);
+                    }
+                });
+                break;
+            case R.layout.nest_scrolling:
+                nestScrolling(view);
+                break;
+            default:
+        }
+
+    }
+
+    private void nestScrolling(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.rechcylerView);
+        LinearLayoutManager manager;
+        recyclerView.setLayoutManager(manager = new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(new RecyclerView.Adapter<TextHolder>() {
+            class TextHolder {
+            }
+
+            @NonNull
+            @Override
+            public PagerFragment.TextHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+                return new PagerFragment.TextHolder(new RandTextView(getActivity()));
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull PagerFragment.TextHolder holder, int position) {
+
+            }
+
+
+            @Override
+            public int getItemCount() {
+                return Utils.TEXTS.length;
+            }
+
+
+        });
+    }
+
+    class TextHolder extends RecyclerView.ViewHolder {
+
+        public TextHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 
     private void addTagChild(TagLayout tagLayout) {
@@ -79,11 +127,11 @@ public class PagerFragment extends Fragment {
         tagLayout.removeAllViews();
         ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.rightMargin = Utils.dp2px(12);
-        params.bottomMargin= Utils.dp2px(12);
-        params.leftMargin= Utils.dp2px(12);
-        params.topMargin= Utils.dp2px(12);
+        params.bottomMargin = Utils.dp2px(12);
+        params.leftMargin = Utils.dp2px(12);
+        params.topMargin = Utils.dp2px(12);
         for (int i = 0; i < childCount; i++) {
-            tagLayout.addView(new RandTextView(getActivity()),params);
+            tagLayout.addView(new RandTextView(getActivity()), params);
         }
     }
 }

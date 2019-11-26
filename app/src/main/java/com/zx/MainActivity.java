@@ -31,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
         items.add(new PagerItem("多触—接力", R.layout.multi_touch_view));
         items.add(new PagerItem("多触—配合", R.layout.multi_touch_view2));
         items.add(new PagerItem("多触—独立", R.layout.multi_touch_view3));
+        items.add(new PagerItem("嵌套滑动", R.layout.nest_scrolling));
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+
 
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(8);
+        viewPager.setCurrentItem(9);
     }
 
 
