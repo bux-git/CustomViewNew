@@ -1,5 +1,6 @@
 package com.zx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.view.ViewGroup;
 import com.zx.customview.R;
 import com.zx.customview.RandTextView;
 import com.zx.customview.TagLayout;
+import com.zx.transition.ActivityA;
+import com.zx.transition.ElementShareActivity;
+import com.zx.transition.SamaPageActivity2;
+import com.zx.transition.SamePageActivity1;
 
 import java.util.Random;
 
@@ -79,8 +84,54 @@ public class PagerFragment extends Fragment {
             case R.layout.nest_scrolling:
                 nestScrolling(view);
                 break;
+
+            case R.layout.transition_layout:
+                transitionGo(view);
+                break;
             default:
         }
+
+    }
+
+    private void transitionGo(View view) {
+        view.findViewById(R.id.btn_content)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().startActivity(new Intent(getActivity(), ActivityA.class));
+                    }
+                });
+
+        view.findViewById(R.id.btn_share)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().startActivity(new Intent(getActivity(), ElementShareActivity.class));
+                    }
+                });
+
+        view.findViewById(R.id.btn_same_page1)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().startActivity(new Intent(getActivity(), SamePageActivity1.class));
+                    }
+                });
+        view.findViewById(R.id.btn_same_page2)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().startActivity(new Intent(getActivity(), SamaPageActivity2.class));
+                    }
+                });
+
+        view.findViewById(R.id.btn_circular)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().startActivity(new Intent(getActivity(), SamaPageActivity2.class));
+                    }
+                });
 
     }
 
@@ -113,6 +164,7 @@ public class PagerFragment extends Fragment {
 
 
         });
+
     }
 
     class TextHolder extends RecyclerView.ViewHolder {

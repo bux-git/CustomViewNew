@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.zx.transition.ActivityA"
+            android:theme="@style/transitionTheme" />
+        <activity
+            android:name="com.zx.transition.ActivityB"
+            android:theme="@style/transitionTheme" />
+        <activity android:name="com.zx.transition.ElementShareActivity" />
+        <activity android:name="com.zx.transition.ElementShareActivityB" />
+        <activity android:name="com.zx.transition.SamePageActivity1" />
+        <activity android:name="com.zx.transition.SamaPageActivity2" />
     </application>
 
 </manifest>

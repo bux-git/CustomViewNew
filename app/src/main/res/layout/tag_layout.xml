@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
-    android:layout_width="wrap_content"
-        android:layout_height="200dp"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
     <com.zx.customview.TagLayout
         android:id="@+id/tagLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
         android:padding="6dp">
@@ -17,52 +18,6 @@
             android:layout_height="wrap_content" />
 
 
-        <!-- <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />
-
-         <com.zx.customview.view.RandTextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_margin="12dp" />-->
-
     </com.zx.customview.TagLayout>
 
-</HorizontalScrollView>
+</androidx.core.widget.NestedScrollView>

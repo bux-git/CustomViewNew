@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new PagerItem("多触—配合", R.layout.multi_touch_view2));
         items.add(new PagerItem("多触—独立", R.layout.multi_touch_view3));
         items.add(new PagerItem("嵌套滑动", R.layout.nest_scrolling));
+        items.add(new PagerItem("过渡动画", R.layout.transition_layout));
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(9);
+        viewPager.setCurrentItem(10);
+
     }
 
 
