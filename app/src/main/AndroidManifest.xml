@@ -26,6 +26,8 @@
         <activity android:name="com.zx.transition.ElementShareActivityB" />
         <activity android:name="com.zx.transition.SamePageActivity1" />
         <activity android:name="com.zx.transition.SamaPageActivity2" />
+        <activity android:name="com.zx.motionlayout.MltActivity1" />
+        <activity android:name="com.zx.motionlayout.MltActivity2" />
     </application>
 
 </manifest>

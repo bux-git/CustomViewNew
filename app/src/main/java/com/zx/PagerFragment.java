@@ -1,7 +1,9 @@
 package com.zx;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import com.zx.customview.R;
 import com.zx.customview.RandTextView;
 import com.zx.customview.TagLayout;
+import com.zx.motionlayout.MltActivity1;
+import com.zx.motionlayout.MltActivity2;
 import com.zx.transition.ActivityA;
 import com.zx.transition.ElementShareActivity;
 import com.zx.transition.SamaPageActivity2;
@@ -19,6 +23,7 @@ import java.util.Random;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,9 +93,31 @@ public class PagerFragment extends Fragment {
             case R.layout.transition_layout:
                 transitionGo(view);
                 break;
+            case R.layout.motion_layout:
+                motionLayout(view);
+                break;
+
             default:
         }
 
+    }
+
+    private void motionLayout(View view) {
+        view.findViewById(R.id.btn_motion_one)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        starta(MltActivity1.class);
+                    }
+                });
+
+        view.findViewById(R.id.btn_motion_two)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        starta(MltActivity2.class);
+                    }
+                });
     }
 
     private void transitionGo(View view) {
@@ -98,7 +125,7 @@ public class PagerFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(getActivity(), ActivityA.class));
+                        starta(ActivityA.class);
                     }
                 });
 
@@ -106,7 +133,7 @@ public class PagerFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(getActivity(), ElementShareActivity.class));
+                        starta(ElementShareActivity.class);
                     }
                 });
 
@@ -114,14 +141,14 @@ public class PagerFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(getActivity(), SamePageActivity1.class));
+                        starta(SamePageActivity1.class);
                     }
                 });
         view.findViewById(R.id.btn_same_page2)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(getActivity(), SamaPageActivity2.class));
+                        starta(SamaPageActivity2.class);
                     }
                 });
 
@@ -129,10 +156,16 @@ public class PagerFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(getActivity(), SamaPageActivity2.class));
+                        starta(SamaPageActivity2.class);
+
                     }
                 });
 
+    }
+
+    private <T extends AppCompatActivity> void starta(Class<T> cls) {
+        getActivity().getWindow().setEnterTransition(new Fade());
+        getActivity().startActivity(new Intent(getActivity(), cls), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
     }
 
     private void nestScrolling(View view) {
@@ -140,30 +173,7 @@ public class PagerFragment extends Fragment {
         LinearLayoutManager manager;
         recyclerView.setLayoutManager(manager = new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(new RecyclerView.Adapter<TextHolder>() {
-            class TextHolder {
-            }
-
-            @NonNull
-            @Override
-            public PagerFragment.TextHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                return new PagerFragment.TextHolder(new RandTextView(getActivity()));
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull PagerFragment.TextHolder holder, int position) {
-
-            }
-
-
-            @Override
-            public int getItemCount() {
-                return Utils.TEXTS.length;
-            }
-
-
-        });
+        recyclerView.setAdapter(new TextAdapter());
 
     }
 

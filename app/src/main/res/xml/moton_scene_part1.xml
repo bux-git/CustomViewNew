@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Transition
+        app:constraintSetEnd="@layout/motion_layout_part1_end"
+        app:constraintSetStart="@layout/motion_layout_part1_start">
+        <OnClick
+            app:targetId="@+id/iv_outside"
+            app:clickAction="toggle" />
+        <OnSwipe
+            app:touchAnchorId="@+id/iv_topBar"
+            app:dragDirection="dragUp"
+            app:touchAnchorSide="top"/>
+    </Transition>
+
+</MotionScene>

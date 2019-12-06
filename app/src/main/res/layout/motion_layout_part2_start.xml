@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:showPaths="true"
+    app:layoutDescription="@xml/motion_scene_part2">
+
+
+
+    <ImageView
+        android:id="@+id/iv_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <ImageView
+        android:id="@+id/iv_2"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <ImageView
+        android:id="@+id/iv_3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+    <ImageView
+        android:id="@+id/iv_5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+    <ImageView
+        android:id="@+id/iv_6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+
+    <ImageView
+        android:id="@+id/iv_main"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
