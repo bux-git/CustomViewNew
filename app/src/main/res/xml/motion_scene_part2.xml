@@ -78,6 +78,7 @@
             <CustomAttribute
                 app:attributeName="backgroundColor"
                 app:customColorValue="@android:color/holo_orange_dark" />
+            <Motion app:drawPath="deltaRelative" />
         </Constraint>
 
 
