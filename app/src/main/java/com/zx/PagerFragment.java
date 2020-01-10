@@ -118,6 +118,8 @@ public class PagerFragment extends Fragment {
                         starta(MltActivity2.class);
                     }
                 });
+
+
     }
 
     private void transitionGo(View view) {

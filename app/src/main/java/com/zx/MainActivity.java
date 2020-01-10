@@ -1,6 +1,7 @@
 package com.zx;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zx.customview.R;
@@ -14,12 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //threadTest();
+
+
+        Log.d(TAG, "onCreate: " + (MainActivity.class == getClass()));
         setContentView(R.layout.activity_main);
         final ArrayList<PagerItem> items = new ArrayList<>();
         items.add(new PagerItem("MaterialEditText", R.layout.material_edit_text));
@@ -60,6 +71,70 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setCurrentItem(11);
 
+
+        Single.just(1)
+                .map(new Function<Integer, String>() {
+                    @Override
+                    public String apply(Integer integer) throws Throwable {
+
+                        return String.valueOf(integer);
+                    }
+                })
+                .subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+
+    }
+
+    private void threadTest() {
+
+        Thread thread1 = new Thread(new RunnableTest(MainActivity.class));
+        Thread thread2 = new Thread(new RunnableTest(getClass()));
+
+        thread1.start();
+        thread2.start();
+    }
+
+    class RunnableTest implements Runnable {
+
+        private int count = 100;
+
+        private Object lock;
+
+
+        public RunnableTest(Object lock) {
+            this.lock = lock;
+
+        }
+
+        @Override
+        public void run() {
+
+            synchronized (lock) {
+                for (int i = 0; i < count; i++) {
+                    Log.d(TAG, "run: " + Thread.currentThread() + " i:" + i);
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
 
